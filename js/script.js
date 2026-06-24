@@ -105,10 +105,10 @@ console.log('雪糕自动售货机官网已加载');
 
     // 图片数组
     const images = [
-        'images/91c96cc672c9315eca153c4a7c9ae4cd.jpg',
-        'images/efaaa8ca0ce04271289f8d6f6010d2f5.jpg',
-        'images/3f194bbdf721315cda7cf6a5d86f5c64.jpg',
-        'images/2051a7173b33303302c061db3a493ed2.jpg'
+        'images/91c96cc672c9315eca153c4a7c9ae4cd.png',
+        'images/efaaa8ca0ce04271289f8d6f6010d2f5.png',
+        'images/3f194bbdf721315cda7cf6a5d86f5c64.png',
+        'images/2051a7173b33303302c061db3a493ed2.png'
     ];
 
     let isDragging = false;
