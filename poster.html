@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrostVend 招商海报</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #030712 0%, #0a1628 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 30px 0;
+        }
+        .poster {
+            width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(10,22,40,0.95) 0%, rgba(3,7,18,0.98) 100%);
+            border: 2px solid rgba(0,212,255,0.35);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,212,255,0.2);
+        }
+        .hero {
+            position: relative;
+            padding: 48px 50px 36px;
+            background: radial-gradient(circle at center, rgba(0,212,255,0.15) 0%, transparent 60%);
+        }
+        .badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border: 1px solid #00d4ff;
+            border-radius: 20px;
+            color: #00d4ff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .hero-wrap {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+        .hero-text { flex: 1; }
+        .hero-title {
+            font-size: 52px;
+            line-height: 1.15;
+            font-weight: 900;
+            margin-bottom: 18px;
+        }
+        .hero-title span {
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 22px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.88);
+        }
+        .hero-image {
+            width: 320px;
+            flex-shrink: 0;
+        }
+        .hero-image img {
+            width: 100%;
+            display: block;
+            filter: drop-shadow(0 0 25px rgba(0,212,255,0.2));
+        }
+        .section {
+            padding: 34px 50px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .section-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #00d4ff;
+            margin-bottom: 22px;
+            text-align: center;
+        }
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        .highlight {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.25);
+            border-radius: 16px;
+            padding: 24px 18px;
+            text-align: center;
+        }
+        .highlight-num {
+            font-size: 38px;
+            font-weight: 900;
+            color: #00d4ff;
+            margin-bottom: 6px;
+            text-shadow: 0 0 18px rgba(0,212,255,0.3);
+        }
+        .highlight-label {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 700;
+        }
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        .adv {
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid #00d4ff;
+            border-radius: 12px;
+            padding: 18px 18px 18px 20px;
+        }
+        .adv h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .adv p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.75);
+        }
+        .scenes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .scene-tag {
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(0,212,255,0.1);
+            border: 1px solid rgba(0,212,255,0.3);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .contact {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            align-items: center;
+        }
+        .contact-left h3 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: #00d4ff;
+        }
+        .contact-left p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.88);
+        }
+        .contact-left .phone {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin: 10px 0;
+        }
+        .contact-left .wechat,
+        .contact-left .email,
+        .contact-left .site {
+            font-size: 18px;
+            color: rgba(255,255,255,0.86);
+        }
+        .contact-right {
+            text-align: center;
+        }
+        .contact-right img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 2px solid rgba(0,212,255,0.35);
+            background: #fff;
+            margin: 0 auto 12px;
+        }
+        .contact-right p {
+            color: rgba(255,255,255,0.75);
+            font-size: 15px;
+        }
+        .footer {
+            padding: 22px 50px 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+        @media (max-width: 940px) {
+            .poster { width: calc(100% - 24px); }
+            .hero-wrap { flex-direction: column; }
+            .hero-image { width: 260px; }
+            .highlights { grid-template-columns: repeat(2, 1fr); }
+            .advantages { grid-template-columns: 1fr; }
+            .contact { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .hero, .section, .footer { padding-left: 20px; padding-right: 20px; }
+            .hero-title { font-size: 34px; }
+            .hero-subtitle { font-size: 17px; }
+            .section-title { font-size: 24px; }
+            .highlights { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <section class="hero">
+            <div class="badge">WORLD'S FIRST · 全世界首创</div>
+            <div class="hero-wrap">
+                <div class="hero-text">
+                    <h1 class="hero-title">挂式雪糕自动售货机<br><span>开启社区雪糕批发零售新时代</span></h1>
+                    <p class="hero-subtitle">
+                        颠覆传统卧式冰柜<br>
+                        让雪糕销售更直观、更稳定、更高效
+                    </p>
+                </div>
+                <div class="hero-image">
+                    <img src="images/product/1.png" alt="FrostVend 挂式雪糕自动售货机">
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">核心卖点一眼看懂</h2>
+            <div class="highlights">
+                <div class="highlight"><div class="highlight-num">600</div><div class="highlight-label">支大容量</div></div>
+                <div class="highlight"><div class="highlight-num">50</div><div class="highlight-label">个单品陈列</div></div>
+                <div class="highlight"><div class="highlight-num">30</div><div class="highlight-label">支连续出货</div></div>
+                <div class="highlight"><div class="highlight-num">0.1%</div><div class="highlight-label">超低卡货率</div></div>
+                <div class="highlight"><div class="highlight-num">10-12</div><div class="highlight-label">度/天户外能耗</div></div>
+                <div class="highlight"><div class="highlight-num">0</div><div class="highlight-label">整体无霜</div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">八大核心特点</h2>
+            <div class="advantages">
+                <div class="adv"><h3>挂式陈列</h3><p>所有商品悬挂式整齐陈列，顾客通过真空玻璃可直观看到全部雪糕，品牌展示效果强。</p></div>
+                <div class="adv"><h3>超低故障率</h3><p>商品悬挂挂载，接触面积小，无水汽粘连，故障率≤0.1%。</p></div>
+                <div class="adv"><h3>连续出货30支</h3><p>一次性购买30支雪糕，连续出货，故障率≤0.1%。</p></div>
+                <div class="adv"><h3>600支大容量</h3><p>50个货道，每道12支，满载600支库存容量。</p></div>
+                <div class="adv"><h3>50个单品陈列</h3><p>可陈列50个单品，满足顾客多样化选择需求。</p></div>
+                <div class="adv"><h3>超低能耗</h3><p>户外单日耗电约10-12度，与一台卧式冰柜耗电量相同。</p></div>
+                <div class="adv"><h3>无霜箱体</h3><p>采用风冷制冷技术，实现箱体无霜，干净整洁。</p></div>
+                <div class="adv"><h3>模块化结构</h3><p>制冷机组、箱体、出货结构三大模块，可整体更换，降低维护成本。</p></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">适合投放场景</h2>
+            <div class="scenes">
+                <div class="scene-tag">社区</div>
+                <div class="scene-tag">校园</div>
+                <div class="scene-tag">商场</div>
+                <div class="scene-tag">景区</div>
+                <div class="scene-tag">公园</div>
+                <div class="scene-tag">街头</div>
+                <div class="scene-tag">医院</div>
+                <div class="scene-tag">工厂园区</div>
+                <div class="scene-tag">高铁 / 地铁</div>
+                <div class="scene-tag">机场</div>
+                <div class="scene-tag">海边 / 乐园</div>
+                <div class="scene-tag">办公楼宇</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="contact">
+                <div class="contact-left">
+                    <h3>招商合作</h3>
+                    <p>支持 OEM / ODM、区域代理、设备采购、技术合作</p>
+                    <div class="phone">+86 18180899181</div>
+                    <div class="wechat">微信：同手机号</div>
+                    <div class="email">邮箱：294373054@qq.com</div>
+                    <div class="site">官网：frostvend.com</div>
+                </div>
+                <div class="contact-right">
+                    <img src="images/qrcode.jpg" alt="微信二维码">
+                    <p>扫码添加微信，获取合作资料</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">FrostVend · 成都智草网络科技有限公司</div>
+    </div>
+</body>
+</html>
