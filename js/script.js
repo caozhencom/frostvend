@@ -99,145 +99,133 @@ console.log('雪糕自动售货机官网已加载');
     const btnAutoRotate = document.getElementById('btnAutoRotate');
     const btnReset = document.getElementById('btnReset');
     const mainImage = document.getElementById('mainImage');
-    const angleBtns = document.querySelectorAll('.viewer-360-angle-btn');
+    const angleBtns = Array.from(document.querySelectorAll('.viewer-360-angle-btn'));
 
-    if (!viewer) return;
+    if (!viewer || !mainImage || angleBtns.length === 0) return;
 
-    // 图片数组
-    const images = [
-        'images/product/1.png?v=20260715',
-        'images/product/2.png?v=20260715',
-        'images/product/3.png?v=20260715',
-        'images/product/4.png?v=20260715',
-        'images/product/5.png?v=20260715'
-    ];
+    const images = angleBtns
+        .map((btn) => btn.querySelector('img'))
+        .filter(Boolean)
+        .map((img) => img.getAttribute('src'));
+
+    if (images.length === 0) return;
+
+    images.forEach((src) => {
+        const preload = new Image();
+        preload.src = src;
+    });
+
+    const dragStep = 32;
+    const autoRotateDelay = 900;
 
     let isDragging = false;
     let startX = 0;
-    let currentRotation = 0;
-    let autoRotate = true;
+    let lastX = 0;
+    let dragOffset = 0;
     let currentAngle = 0;
+    let autoRotate = true;
+    let autoRotateTimer = null;
 
-    // 初始化
-    viewer.style.transform = 'rotateY(0deg)';
+    function normalizeIndex(index) {
+        return (index + images.length) % images.length;
+    }
 
-    // 切换图片
     function switchImage(angleIndex) {
-        currentAngle = angleIndex;
-        if (mainImage && images[angleIndex]) {
-            mainImage.src = images[angleIndex];
-        }
-        // 更新按钮状态
+        currentAngle = normalizeIndex(angleIndex);
+        mainImage.src = images[currentAngle];
         angleBtns.forEach((btn, index) => {
-            btn.classList.toggle('active', index === angleIndex);
+            btn.classList.toggle('active', index === currentAngle);
         });
     }
 
-    // 角度切换按钮事件
-    angleBtns.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            switchImage(index);
-        });
-    });
+    function stopAutoRotate() {
+        autoRotate = false;
+        if (autoRotateTimer) {
+            window.clearInterval(autoRotateTimer);
+            autoRotateTimer = null;
+        }
+        btnAutoRotate?.classList.remove('active');
+    }
 
-    // 拖动开始
+    function startAutoRotate() {
+        if (images.length < 2) return;
+        stopAutoRotate();
+        autoRotate = true;
+        btnAutoRotate?.classList.add('active');
+        autoRotateTimer = window.setInterval(() => {
+            switchImage(currentAngle + 1);
+        }, autoRotateDelay);
+    }
+
     function handleDragStart(e) {
         isDragging = true;
         startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-
-        // 暂停自动旋转
-        if (autoRotate) {
-            viewer.classList.add('paused');
-        }
-
-        // 获取当前旋转角度
-        const transform = getComputedStyle(viewer).transform;
-        if (transform !== 'none') {
-            const matrix = transform.split('(')[1].split(')')[0].split(',');
-            const a = parseFloat(matrix[0]);
-            const b = parseFloat(matrix[1]);
-            currentRotation = Math.round(Math.atan2(b, a) * (180 / Math.PI));
-            if (currentRotation < 0) currentRotation += 360;
-        }
+        lastX = startX;
+        dragOffset = 0;
+        viewer.classList.add('dragging');
+        stopAutoRotate();
     }
 
-    // 拖动移动
     function handleDragMove(e) {
         if (!isDragging) return;
 
         const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        const deltaX = clientX - startX;
+        const deltaX = clientX - lastX;
+        lastX = clientX;
+        dragOffset += deltaX;
 
-        // 计算新的旋转角度
-        const newRotation = currentRotation + (deltaX * 0.5);
-        viewer.style.transform = `rotateY(${newRotation}deg)`;
-    }
+        if (e.cancelable) {
+            e.preventDefault();
+        }
 
-    // 拖动结束
-    function handleDragEnd() {
-        if (!isDragging) return;
-        isDragging = false;
-
-        // 更新当前角度
-        const transform = getComputedStyle(viewer).transform;
-        if (transform !== 'none') {
-            const matrix = transform.split('(')[1].split(')')[0].split(',');
-            const a = parseFloat(matrix[0]);
-            const b = parseFloat(matrix[1]);
-            currentRotation = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+        while (Math.abs(dragOffset) >= dragStep) {
+            const direction = dragOffset > 0 ? -1 : 1;
+            switchImage(currentAngle + direction);
+            dragOffset += direction * dragStep;
         }
     }
 
-    // 鼠标事件
+    function handleDragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        dragOffset = 0;
+        viewer.classList.remove('dragging');
+    }
+
+    angleBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            stopAutoRotate();
+            switchImage(index);
+        });
+    });
+
     viewer.addEventListener('mousedown', handleDragStart);
     document.addEventListener('mousemove', handleDragMove);
     document.addEventListener('mouseup', handleDragEnd);
+    viewer.addEventListener('mouseleave', handleDragEnd);
 
-    // 触摸事件
     viewer.addEventListener('touchstart', handleDragStart, { passive: true });
-    document.addEventListener('touchmove', handleDragMove, { passive: true });
+    document.addEventListener('touchmove', handleDragMove, { passive: false });
     document.addEventListener('touchend', handleDragEnd);
+    document.addEventListener('touchcancel', handleDragEnd);
 
-    // 自动旋转按钮
     if (btnAutoRotate) {
         btnAutoRotate.addEventListener('click', () => {
-            autoRotate = !autoRotate;
-
-            if (autoRotate) {
-                viewer.classList.add('auto-rotate');
-                viewer.classList.remove('paused');
-                btnAutoRotate.classList.add('active');
-            } else {
-                viewer.classList.remove('auto-rotate');
-                viewer.classList.remove('paused');
-                btnAutoRotate.classList.remove('active');
-
-                // 保持在当前角度
-                const transform = getComputedStyle(viewer).transform;
-                if (transform !== 'none') {
-                    const matrix = transform.split('(')[1].split(')')[0].split(',');
-                    const a = parseFloat(matrix[0]);
-                    const b = parseFloat(matrix[1]);
-                    currentRotation = Math.round(Math.atan2(b, a) * (180 / Math.PI));
-                    viewer.style.transform = `rotateY(${currentRotation}deg)`;
-                }
+            if (autoRotateTimer) {
+                stopAutoRotate();
+                return;
             }
+            startAutoRotate();
         });
     }
 
-    // 重置按钮
     if (btnReset) {
         btnReset.addEventListener('click', () => {
-            currentRotation = 0;
-            viewer.style.transform = 'rotateY(0deg)';
-
-            // 恢复自动旋转
-            if (!autoRotate) {
-                autoRotate = true;
-                viewer.classList.add('auto-rotate');
-                viewer.classList.remove('paused');
-                if (btnAutoRotate) btnAutoRotate.classList.add('active');
-            }
+            switchImage(0);
+            startAutoRotate();
         });
     }
+
+    switchImage(0);
+    startAutoRotate();
 })();
