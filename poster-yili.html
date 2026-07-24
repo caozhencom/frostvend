@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrostVend - 大型雪糕品牌终端合作提案</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #030712;
+            --panel: #0a1628;
+            --panel-soft: rgba(255,255,255,0.04);
+            --accent: #00d4ff;
+            --accent-2: #7c3aed;
+            --text: #ffffff;
+            --muted: rgba(255,255,255,0.76);
+            --line: rgba(255,255,255,0.08);
+        }
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #030712 0%, #0a1628 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 28px 0;
+        }
+        .proposal {
+            width: 960px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(10,22,40,0.97) 0%, rgba(3,7,18,0.99) 100%);
+            border: 2px solid rgba(0,212,255,0.35);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 0 46px rgba(0,212,255,0.2);
+        }
+        .hero {
+            position: relative;
+            padding: 52px 54px 42px;
+            background: radial-gradient(circle at 20% 20%, rgba(0,212,255,0.18) 0%, transparent 42%), radial-gradient(circle at 80% 0%, rgba(124,58,237,0.16) 0%, transparent 36%);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border: 1px solid rgba(0,212,255,0.55);
+            border-radius: 999px;
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
+        }
+        .hero-wrap {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 34px;
+            align-items: center;
+        }
+        .hero-label {
+            font-size: 15px;
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .hero-title {
+            font-size: 54px;
+            line-height: 1.12;
+            font-weight: 900;
+            margin-bottom: 14px;
+        }
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 23px;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .hero-desc {
+            font-size: 17px;
+            line-height: 1.9;
+            color: var(--muted);
+            margin-bottom: 22px;
+        }
+        .hero-points {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .hero-point {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.22);
+            border-radius: 14px;
+            padding: 14px 14px 13px;
+        }
+        .hero-point strong {
+            display: block;
+            color: var(--text);
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .hero-point span {
+            color: rgba(255,255,255,0.72);
+            font-size: 13px;
+            line-height: 1.65;
+            display: block;
+        }
+        .hero-image {
+            text-align: center;
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 360px;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 30px rgba(0,212,255,0.22));
+        }
+        .hero-image-note {
+            margin-top: 14px;
+            color: rgba(255,255,255,0.6);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .section {
+            padding: 38px 54px;
+            border-top: 1px solid var(--line);
+        }
+        .section-title {
+            font-size: 31px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.72);
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 760px;
+            margin: 0 auto 26px;
+        }
+        .issue-grid,
+        .value-grid,
+        .metrics-grid,
+        .asset-grid,
+        .commercial-grid,
+        .proof-grid {
+            display: grid;
+            gap: 18px;
+        }
+        .issue-grid,
+        .value-grid,
+        .asset-grid,
+        .commercial-grid,
+        .proof-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .metrics-grid {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+        .card {
+            background: var(--panel-soft);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 18px;
+            padding: 22px 18px;
+        }
+        .card h3 {
+            font-size: 18px;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+        .big-claim {
+            background: linear-gradient(180deg, rgba(0,212,255,0.09) 0%, rgba(124,58,237,0.08) 100%);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 22px;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .big-claim h3 {
+            font-size: 30px;
+            margin-bottom: 14px;
+            color: var(--accent);
+        }
+        .big-claim p {
+            font-size: 18px;
+            line-height: 1.95;
+            color: rgba(255,255,255,0.88);
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .metric {
+            text-align: center;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.22);
+            border-radius: 16px;
+            padding: 20px 10px;
+        }
+        .metric-num {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 0 18px rgba(0,212,255,0.25);
+        }
+        .metric-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .split-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .panel {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 20px;
+            padding: 24px 22px;
+        }
+        .panel h3 {
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .panel p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 14px;
+        }
+        .panel ul {
+            list-style: none;
+        }
+        .panel li {
+            position: relative;
+            padding-left: 18px;
+            color: rgba(255,255,255,0.86);
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 8px;
+        }
+        .panel li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        .visual-row {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 22px;
+            align-items: stretch;
+        }
+        .visual-main img,
+        .visual-side img,
+        .proof-card img {
+            width: 100%;
+            display: block;
+            border-radius: 18px;
+            border: 1px solid rgba(0,212,255,0.18);
+            background: rgba(255,255,255,0.03);
+        }
+        .visual-main,
+        .visual-side,
+        .proof-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 20px;
+            padding: 16px;
+        }
+        .visual-main h3,
+        .visual-side h3,
+        .proof-card h3 {
+            font-size: 20px;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        .visual-main p,
+        .visual-side p,
+        .proof-card p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+        .visual-side-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .visual-side-grid img {
+            height: 168px;
+            object-fit: cover;
+        }
+        .proof-grid {
+            align-items: start;
+        }
+        .proof-card img {
+            height: 240px;
+            object-fit: contain;
+            background: #fff;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .tag {
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(0,212,255,0.1);
+            border: 1px solid rgba(0,212,255,0.28);
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .contact {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 26px;
+            align-items: center;
+        }
+        .contact-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.25);
+            border-radius: 20px;
+            padding: 26px 24px;
+        }
+        .contact-box h3 {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+        .contact-box p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.88);
+            line-height: 1.9;
+            margin-bottom: 10px;
+        }
+        .contact-box .phone {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--text);
+            margin: 10px 0;
+        }
+        .contact-box .meta {
+            font-size: 17px;
+            color: rgba(255,255,255,0.84);
+        }
+        .qr-box {
+            text-align: center;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.25);
+            border-radius: 20px;
+            padding: 24px;
+        }
+        .qr-box img {
+            width: 210px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 18px;
+            border: 2px solid rgba(0,212,255,0.35);
+            background: #fff;
+            margin: 0 auto 14px;
+            display: block;
+        }
+        .qr-box p {
+            color: rgba(255,255,255,0.75);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .footer {
+            padding: 22px 54px 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.52);
+            font-size: 13px;
+        }
+        @media (max-width: 980px) {
+            .proposal { width: calc(100% - 24px); }
+            .hero-wrap,
+            .split-panel,
+            .visual-row,
+            .contact { grid-template-columns: 1fr; }
+            .issue-grid,
+            .value-grid,
+            .asset-grid,
+            .commercial-grid,
+            .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .metrics-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (max-width: 640px) {
+            body { padding: 12px 0; }
+            .hero,
+            .section,
+            .footer { padding-left: 20px; padding-right: 20px; }
+            .hero-title { font-size: 36px; }
+            .hero-subtitle { font-size: 19px; }
+            .section-title { font-size: 25px; }
+            .hero-points,
+            .issue-grid,
+            .value-grid,
+            .asset-grid,
+            .commercial-grid,
+            .proof-grid,
+            .metrics-grid,
+            .visual-side-grid { grid-template-columns: 1fr; }
+            .big-claim h3 { font-size: 24px; }
+            .big-claim p { font-size: 16px; }
+            .visual-side-grid img { height: auto; }
+            .contact-box .phone { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="proposal">
+        <section class="hero">
+            <div class="badge">FrostVend · 大型雪糕品牌终端合作提案</div>
+            <div class="hero-wrap">
+                <div class="hero-text">
+                    <div class="hero-label">给伊利 / 蒙牛 / 和路雪等大型雪糕品牌的资料</div>
+                    <h1 class="hero-title">让您的产品<br><span>离顾客更近</span></h1>
+                    <div class="hero-subtitle">FrostVend 不是普通售货机，而是雪糕品牌 365 天持续在线的社区展示与销售终端。</div>
+                    <p class="hero-desc">
+                        对大型雪糕品牌来说，终端竞争的核心不是单纯多一个销售点，而是能否持续展示品牌、持续展示产品、持续影响顾客，并让总部真正看得见、管得住、复盘得了。<br>
+                        FrostVend 以远强于传统卧式冰柜的产品展示能力，把品牌展示、产品陈列、真实销售和后台可视化管理放在同一个终端内持续发生。
+                    </p>
+                    <div class="hero-points">
+                        <div class="hero-point">
+                            <strong>展示能力远强于传统冰柜</strong>
+                            <span>正面可见、单品清晰、品牌完整呈现，更适合新品与重点产品展示。</span>
+                        </div>
+                        <div class="hero-point">
+                            <strong>展示与销售一体化</strong>
+                            <span>不是只做广告，也不是只卖货，而是展示、陈列、成交在同一个终端内完成。</span>
+                        </div>
+                        <div class="hero-point">
+                            <strong>365 天持续心智培养</strong>
+                            <span>终端全年在线，持续让顾客看到品牌、看到产品、形成购买偏好。</span>
+                        </div>
+                        <div class="hero-point">
+                            <strong>总部后台可见</strong>
+                            <span>终端销售、陈列执行、运营状态可追踪，不再依赖“看不见”的终端投入。</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/product/1.png?v=20260724" alt="FrostVend 挂式雪糕自动售货机">
+                    <div class="hero-image-note">挂式陈列 · 正面展示 · 独立品牌终端 · 总部后台可见</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">为什么大型雪糕品牌还需要新终端？</h2>
+            <div class="section-subtitle">传统卧式冰柜能卖货，但在品牌展示、终端可控和总部管理层面存在天然不足。FrostVend 解决的不是冷藏问题，而是展示、销售与终端可视化管理问题。</div>
+            <div class="issue-grid">
+                <div class="card">
+                    <h3>传统冰柜展示能力有限</h3>
+                    <p>产品平躺堆叠、品牌画面不完整、重点产品不突出，新品和高价值产品很难形成独立展示面。</p>
+                </div>
+                <div class="card">
+                    <h3>总部很难看清终端执行</h3>
+                    <p>投了冰柜、陈列费和巡店资源，但终端陈列是否到位、重点产品是否真正被执行，总部反馈仍然滞后。</p>
+                </div>
+                <div class="card">
+                    <h3>顾客被影响的时间太短</h3>
+                    <p>阶段性广告会结束，而社区终端竞争是持续发生的。品牌需要的是全年在线、反复触达顾客的展示窗口。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="big-claim">
+                <h3>FrostVend 的核心价值是持续展示</h3>
+                <p>它让品牌展示、产品陈列、顾客心智培养和现场销售在同一个终端内持续发生。对大型雪糕品牌而言，采购 FrostVend 不是新增一台设备，而是在社区场景中新增一个 365 天持续在线、顾客看得到、总部看得见的独立品牌终端。</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">六组核心硬指标</h2>
+            <div class="metrics-grid">
+                <div class="metric"><div class="metric-num">600</div><div class="metric-label">支容量</div></div>
+                <div class="metric"><div class="metric-num">50</div><div class="metric-label">个单品陈列</div></div>
+                <div class="metric"><div class="metric-num">30</div><div class="metric-label">支连续出货</div></div>
+                <div class="metric"><div class="metric-num">0.1%</div><div class="metric-label">超低卡货率</div></div>
+                <div class="metric"><div class="metric-num">≈10</div><div class="metric-label">度电/天（户外）</div></div>
+                <div class="metric"><div class="metric-num">0</div><div class="metric-label">整体无霜</div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">为什么它的展示能力更强？</h2>
+            <div class="section-subtitle">大型品牌真正需要的，不是让产品“躺在冰柜里等待被翻找”，而是让产品正面面对顾客，持续被看见、被记住、被优先选择。</div>
+            <div class="split-panel">
+                <div class="panel">
+                    <h3>顾客端价值</h3>
+                    <p>雪糕消费大量发生在临场决策时刻。谁更容易被看见，谁就更容易被选中。</p>
+                    <ul>
+                        <li>挂式陈列，产品正面可见</li>
+                        <li>单品清晰，重点产品更容易被注意到</li>
+                        <li>品牌画面完整，整体终端更具高级感</li>
+                        <li>展示和购买在同一终端完成，减少流失</li>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <h3>品牌端价值</h3>
+                    <p>展示不是形象工程，而是销量工程。FrostVend 提供的是更强、更长效、更可控的品牌展示能力。</p>
+                    <ul>
+                        <li>更适合新品、爆品和高价值产品展示</li>
+                        <li>365 天持续在线，长期进行顾客心智培养</li>
+                        <li>品牌形象更统一，终端表达更高端</li>
+                        <li>总部后台可见，终端执行可追踪可复盘</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">品牌采购后能获得什么？</h2>
+            <div class="value-grid">
+                <div class="card">
+                    <h3>独立品牌招牌</h3>
+                    <p>顶部招牌可直接替换为品牌方名称，让终端成为品牌自己的门面，而不是泛化的设备门头。</p>
+                </div>
+                <div class="card">
+                    <h3>两侧海报宣传位</h3>
+                    <p>箱体两侧可做品牌海报与重点产品传播，让终端本身兼具视觉广告位价值。</p>
+                </div>
+                <div class="card">
+                    <h3>30 个专属货道</h3>
+                    <p>50 个货道中可提供 30 个品牌专属货道，形成品牌专区、新品专区、爆品专区的独立展示面。</p>
+                </div>
+                <div class="card">
+                    <h3>展示与销售一体化</h3>
+                    <p>不是只展示不成交的广告位，也不是只卖货但展示力弱的普通设备，而是同一终端内直接完成展示与成交。</p>
+                </div>
+                <div class="card">
+                    <h3>总部后台可见</h3>
+                    <p>品牌方可以通过后台查看终端数据、运营状态和执行反馈，把原本“看不见”的终端变成“看得见”的终端。</p>
+                </div>
+                <div class="card">
+                    <h3>全年持续心智培养</h3>
+                    <p>广告会结束，但社区终端会长期在线。FrostVend 通过反复触达，帮助品牌在顾客心智中占据更稳定的位置。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">真实设备展示与终端表现</h2>
+            <div class="visual-row">
+                <div class="visual-main">
+                    <h3>产品主机与终端形象</h3>
+                    <img src="images/product/2.png?v=20260724" alt="FrostVend 产品展示图">
+                    <p>FrostVend 的终端表达更接近一个独立品牌窗口，而不是传统卧式冰柜。品牌展示、产品展示和购买入口自然融为一体。</p>
+                </div>
+                <div class="visual-side">
+                    <h3>实景与细节图</h3>
+                    <div class="visual-side-grid">
+                        <img src="images/scene/社区.png" alt="社区场景图">
+                        <img src="images/scene/商场.png" alt="商场场景图">
+                        <img src="images/detail/032A8386.jpg" alt="产品细节图">
+                        <img src="images/detail/032A8388.jpg" alt="产品细节图">
+                    </div>
+                    <p>适合社区、商圈、校园、景区等高频即买即食场景，也适合品牌做重点点位、新品试点和品牌专区布局。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">投入结构与合作方式</h2>
+            <div class="section-subtitle">这不是一笔单纯的设备采购费用，而是一笔低管理负担、长期在线、可视化可复盘的品牌终端投入。</div>
+            <div class="commercial-grid">
+                <div class="card">
+                    <h3>设备采购</h3>
+                    <p>采购金额 2.5 万元 / 台，设计使用寿命 5 年。采购获得的是一个长期可控的独立品牌终端，而不是一次性的短期广告动作。</p>
+                </div>
+                <div class="card">
+                    <h3>运营方承担</h3>
+                    <p>全年电费约 3500–4000 元、点位租金约 3000 元、终端日常运营、维护与盈亏由运营方承担，降低品牌管理负担。</p>
+                </div>
+                <div class="card">
+                    <h3>品牌获得</h3>
+                    <p>品牌招牌、两侧海报位、30 个专属货道、后台可见权限，以及每年 1000 元年度保底收益。</p>
+                </div>
+                <div class="card">
+                    <h3>供货合作</h3>
+                    <p>由品牌方按照战略合作供货价提供雪糕产品，既保证品牌利润体系，也便于围绕重点产品和新品进行终端表达。</p>
+                </div>
+                <div class="card">
+                    <h3>终端控制</h3>
+                    <p>品牌可以更稳定地掌握终端画面、产品组合和重点产品呈现方式，减少传统终端中“看不见、控不住”的问题。</p>
+                </div>
+                <div class="card">
+                    <h3>长期价值</h3>
+                    <p>广告只能带来阶段性触达，而 FrostVend 可以 365 天持续进行顾客触达、品牌展示与销售转化，形成更长效的终端资产。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">适合品牌布局的重点场景</h2>
+            <div class="tags">
+                <div class="tag">社区独立品牌终端</div>
+                <div class="tag">新品试点终端</div>
+                <div class="tag">品牌专区</div>
+                <div class="tag">爆品展示专区</div>
+                <div class="tag">校园 / 商圈布局</div>
+                <div class="tag">景区 / 乐园高频场景</div>
+                <div class="tag">高价值产品展示</div>
+                <div class="tag">总部可视化管理终端</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">FrostVend 的诞生</h2>
+            <div class="section-subtitle">一次由人类工程师与 AI 大模型协同设计推动的产品创新实践</div>
+            <div class="split-panel">
+                <div class="panel">
+                    <h3>人类分析行业，AI 大模型加速设计</h3>
+                    <p>FrostVend 诞生于 2023 年，起点是一场关于冰淇淋零售终端的重新思考：是否可以设计出一种兼顾品牌展示、社区零售与批量购买的新一代智能销售终端。</p>
+                    <ul>
+                        <li>人类定义真实销售场景与终端需求</li>
+                        <li>AI 参与结构推演、零部件匹配与方案迭代</li>
+                        <li>工程师完成建模、测试验证与落地实现</li>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <h3>从构想到现实</h3>
+                    <p>2024 年确定核心结构，2025 年进入组装与测试阶段。出现了设计时未能考虑的问题与故障，人类工程师与 AI 再次协同，对产品细节和出货结构进行了多轮优化与修正。2026 年，FrostVend 已开始进行小范围点位测试，并基本达到设计预期。</p>
+                    <p>我们相信，未来卓越的产品，将诞生于人类智慧与人工智能深度协同的交汇点。</p>
+                    <p><strong>FrostVend 不仅是新一代冰淇淋零售终端，也代表着未来产品研发方式的深刻变革。</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">专利与真实资料背书</h2>
+            <div class="proof-grid">
+                <div class="proof-card">
+                    <h3>专利结构原创</h3>
+                    <img src="images/patents/实用新型专利证书---螺旋悬挂货道.png" alt="专利证书">
+                    <p>多项国家专利支撑 FrostVend 的螺旋悬挂货道和终端结构创新，确保它不是普通售货机的简单变体。</p>
+                </div>
+                <div class="proof-card">
+                    <h3>真实设备资料</h3>
+                    <img src="images/product/3.png?v=20260724" alt="设备实拍图">
+                    <p>真实产品图和终端形象资料已经具备，便于品牌方快速理解终端结构、展示方式和场景适配性。</p>
+                </div>
+                <div class="proof-card">
+                    <h3>真实终端表达</h3>
+                    <img src="images/scene/高铁.png" alt="场景资料图">
+                    <p>场景资料可用于后续品牌定制提案，进一步针对不同渠道和重点场景做更细的投放表达。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="contact">
+                <div class="contact-box">
+                    <h3>欢迎洽谈合作</h3>
+                    <p>FrostVend 适合用于大型雪糕品牌的社区独立终端、新品试点终端、品牌专区终端与重点场景终端布局。</p>
+                    <p>如果贵司希望进一步了解终端资料、后台能力、合作模式或试点方案，欢迎联系获取详细资料。</p>
+                    <div class="phone">+86 18180899181</div>
+                    <div class="meta">微信：同手机号</div>
+                    <div class="meta">邮箱：294373054@qq.com</div>
+                    <div class="meta">官网：frostvend.com</div>
+                </div>
+                <div class="qr-box">
+                    <img src="images/qrcode.jpg" alt="微信二维码">
+                    <p>扫码联系，获取 FrostVend 大品牌终端合作资料与试点方案。</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">FrostVend · 雪糕品牌 365 天持续在线的社区展示与销售终端</div>
+    </div>
+</body>
+</html>
